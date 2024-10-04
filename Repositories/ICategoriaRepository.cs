@@ -1,5 +1,6 @@
 ﻿using MinhaAPI.Models;
 using MinhaAPI.Pagination;
+using X.PagedList;
 
 namespace MinhaAPI.Repositories
 {
@@ -13,7 +14,7 @@ namespace MinhaAPI.Repositories
         Categoria Update(Categoria categoria); //categoiras que iremos editar
         Categoria Delete(int id);
 
-        Task<PagedList<Categoria>> GetAllAsync(CategoriasParameters categoriasParams);
-        Task<PagedList<Categoria>> GetCategoriasFiltroNomeAsync(CategoriasFiltroNome categoriasParams);
+        Task<IPagedList<Categoria>> GetAllAsync(CategoriasParameters categoriasParams);
+        Task<IPagedList<Categoria>> GetCategoriasFiltroNomeAsync(CategoriasFiltroNome categoriasParams);
     }
 }

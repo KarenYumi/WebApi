@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7NqWz85fVbE=",
+  "dgSpecHash": "ZcyPojSUYqY=",
   "success": true,
   "projectFilePath": "C:\\Users\\ksilva\\Documents\\Curso_WebAPI\\MinhaAPI - Copia\\MinhaAPI\\MinhaAPI.csproj",
   "expectedPackageFiles": [
@@ -66,7 +66,9 @@
     "C:\\Users\\ksilva\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
     "C:\\Users\\ksilva\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
     "C:\\Users\\ksilva\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
-    "C:\\Users\\ksilva\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512"
+    "C:\\Users\\ksilva\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512",
+    "C:\\Users\\ksilva\\.nuget\\packages\\x.pagedlist\\10.2.1\\x.pagedlist.10.2.1.nupkg.sha512",
+    "C:\\Users\\ksilva\\.nuget\\packages\\x.pagedlist.mvc.core\\10.2.1\\x.pagedlist.mvc.core.10.2.1.nupkg.sha512"
   ],
   "logs": []
 }
