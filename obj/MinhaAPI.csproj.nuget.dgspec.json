@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ksilva\\Documents\\Curso_WebAPI\\MinhaAPI - Copia\\MinhaAPI\\MinhaAPI.csproj": {}
+    "C:\\Users\\kyumm\\Desktop\\YO\\ESTÁGIO\\WebApi\\MinhaAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ksilva\\Documents\\Curso_WebAPI\\MinhaAPI - Copia\\MinhaAPI\\MinhaAPI.csproj": {
+    "C:\\Users\\kyumm\\Desktop\\YO\\ESTÁGIO\\WebApi\\MinhaAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ksilva\\Documents\\Curso_WebAPI\\MinhaAPI - Copia\\MinhaAPI\\MinhaAPI.csproj",
+        "projectUniqueName": "C:\\Users\\kyumm\\Desktop\\YO\\ESTÁGIO\\WebApi\\MinhaAPI.csproj",
         "projectName": "MinhaAPI",
-        "projectPath": "C:\\Users\\ksilva\\Documents\\Curso_WebAPI\\MinhaAPI - Copia\\MinhaAPI\\MinhaAPI.csproj",
-        "packagesPath": "C:\\Users\\ksilva\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ksilva\\Documents\\Curso_WebAPI\\MinhaAPI - Copia\\MinhaAPI\\obj\\",
+        "projectPath": "C:\\Users\\kyumm\\Desktop\\YO\\ESTÁGIO\\WebApi\\MinhaAPI.csproj",
+        "packagesPath": "C:\\Users\\kyumm\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kyumm\\Desktop\\YO\\ESTÁGIO\\WebApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ksilva\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kyumm\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -64,23 +64,23 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.8, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.8, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.8, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.8, )"
             },
             "NuGet.Protocol": {
               "target": "Package",
@@ -88,7 +88,11 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.7.3, )"
+              "version": "[6.8.1, )"
+            },
+            "X.PagedList.EF": {
+              "target": "Package",
+              "version": "[10.2.1, )"
             },
             "X.PagedList.Mvc.Core": {
               "target": "Package",
@@ -114,7 +118,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -2,6 +2,8 @@
 using MinhaAPI.Contexto;
 using MinhaAPI.Models;
 using MinhaAPI.Pagination;
+using X.PagedList;
+using X.PagedList.EF;
 
 namespace MinhaAPI.Repositories
 {
@@ -71,15 +73,15 @@ namespace MinhaAPI.Repositories
         //}
 
         //mudei o código para ficar assincrono
-        public async Task<PagedList<Produto>> GetAllAsync(ProdutosParameters produtosParams)
+        public async Task<IPagedList<Produto>> GetAllAsync(ProdutosParameters produtosParams)
         {
             var produtos = await GetProdutosAsync();
             var produtosOrdenados = produtos.OrderBy(p => p.ProdutoId).AsQueryable();
 
-            var resultado = PagedList<Produto>.ToPagedList(produtosOrdenados, produtosParams._pageNumber, produtosParams.PageSize);
+            var resultado = await produtosOrdenados.ToPagedListAsync(produtosParams._pageNumber, produtosParams.PageSize);
             return resultado;
         }
-        public async Task<PagedList<Produto>> GetProdutosFiltroPrecoAsync(ProdutosFiltroPreco produtosFiltroParams)
+        public async Task<IPagedList<Produto>> GetProdutosFiltroPrecoAsync(ProdutosFiltroPreco produtosFiltroParams)
         {
             //var produtos = GetProdutosAsync().AsQueryable();//Queryable tem melhor desemplenho do q ienumerable
             //quando tem asqueryable necessita fazer isto:
@@ -101,8 +103,7 @@ namespace MinhaAPI.Repositories
                     produtos = produtos.Where(p => p.Preco == produtosFiltroParams.Preco.Value).OrderBy(p => p.Preco).ToList(); // Materializa a lista
                 }
             }
-            var produtosFiltrados = PagedList<Produto>.ToPagedList(produtos.AsQueryable(), produtosFiltroParams._pageNumber,
-                                                                                                  produtosFiltroParams.PageSize);
+            var produtosFiltrados = await produtos.AsQueryable().ToPagedListAsync( produtosFiltroParams._pageNumber,produtosFiltroParams.PageSize);
             return produtosFiltrados;
         }
 

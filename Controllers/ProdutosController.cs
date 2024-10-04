@@ -11,6 +11,7 @@ using MinhaAPI.Pagination;
 using MinhaAPI.Repositories;
 using Newtonsoft.Json;
 using System.Security.Principal;
+using X.PagedList;
 
 namespace MinhaAPI.Controllers
 {
@@ -104,16 +105,16 @@ namespace MinhaAPI.Controllers
         }
 
         //cria um método chamado ObterProdutos, não necessitando repetir o código, só colocar no return, como no anterior
-        private ActionResult<IEnumerable<ProdutoDTO>> ObterProdutos(PagedList<Produto> produtos)
+        private ActionResult<IEnumerable<ProdutoDTO>> ObterProdutos(IPagedList<Produto> produtos)
         {
             var metadata = new
             {
-                produtos.TotalCount,
+                produtos.Count,
                 produtos.PageSize,
-                produtos.CurrentPage,
-                produtos.TotalPages,
-                produtos.HasNext,
-                produtos.HasPrevious
+                produtos.PageCount,     //muda os nomes por conta de que mudamos o PagedList que tinhamos criado para o pacote IPagedList
+                produtos.TotalItemCount,
+                produtos.HasNextPage,
+                produtos.HasPreviousPage
             };
 
             Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metadata));

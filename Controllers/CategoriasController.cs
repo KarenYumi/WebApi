@@ -10,6 +10,7 @@ using MinhaAPI.Pagination;
 using MinhaAPI.Repositories;
 using Newtonsoft.Json;
 using System.Data;
+using X.PagedList;
 
 namespace APICatalogo.Controllers;
 
@@ -388,8 +389,8 @@ public class CategoriasController : ControllerBase
     [HttpGet("pagination")]
     public async Task<ActionResult<IEnumerable<CategoriaDTO>>> Get([FromQuery] CategoriasParameters categoriasParameters) //retorna uma lista de produtos
     {
-        var categoria = await _uow.CategoriaRepository.GetAllAsync(categoriasParameters);
-        return ObterCategorias(categoria);
+        var resultados = await _uow.CategoriaRepository.GetAllAsync(categoriasParameters);
+        return ObterCategorias(resultados);
 
     }
 
@@ -404,16 +405,26 @@ public class CategoriasController : ControllerBase
 
     }
 
-    private ActionResult<IEnumerable<CategoriaDTO>> ObterCategorias(PagedList<Categoria> categorias)
+    private ActionResult<IEnumerable<CategoriaDTO>> ObterCategorias(IPagedList<Categoria> categorias)
     {
+        //var metadata = new
+        //{
+        //    categorias.TotalCount,
+        //    categorias.PageSize,
+        //    categorias.CurrentPage,                só vai mudar o nome                      
+        //    categorias.TotalPages,
+        //    categorias.HasNext,
+        //    categorias.HasPrevious
+        //};
+
         var metadata = new
         {
-            categorias.TotalCount,
+            categorias.Count,
             categorias.PageSize,
-            categorias.CurrentPage,
-            categorias.TotalPages,
-            categorias.HasNext,
-            categorias.HasPrevious
+            categorias.PageCount,
+            categorias.TotalItemCount,
+            categorias.HasNextPage,
+            categorias.HasPreviousPage
         };
 
         Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metadata));

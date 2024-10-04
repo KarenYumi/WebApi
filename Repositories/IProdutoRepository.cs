@@ -1,5 +1,6 @@
 ﻿using MinhaAPI.Models;
 using MinhaAPI.Pagination;
+using X.PagedList;
 
 namespace MinhaAPI.Repositories
 {
@@ -13,8 +14,8 @@ namespace MinhaAPI.Repositories
         bool Delete(int id);
 
         //IEnumerable<Produto> GetAll(ProdutosParameters produtosParams); //assinatura de método 
-        Task<PagedList<Produto>> GetAllAsync(ProdutosParameters produtosParams);
+        Task<IPagedList<Produto>> GetAllAsync(ProdutosParameters produtosParams);
 
-        Task<PagedList<Produto>> GetProdutosFiltroPrecoAsync(ProdutosFiltroPreco produtosFiltroParams);
+        Task<IPagedList<Produto>> GetProdutosFiltroPrecoAsync(ProdutosFiltroPreco produtosFiltroParams);
     }
 }
