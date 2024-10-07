@@ -71,7 +71,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[MinhaAPI.DTOs.CategoriaDTO, MinhaAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "X.PagedList.IPagedList\u00601[[MinhaAPI.Models.Categoria, MinhaAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -381,7 +381,17 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "MinhaAPI.DTOs.ProdutoDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "MinhaAPI.Controllers.ProdutosController",

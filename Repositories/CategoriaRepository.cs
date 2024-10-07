@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MinhaAPI.Contexto;
+using MinhaAPI.DTOs;
 using MinhaAPI.Models;
 using MinhaAPI.Pagination;
 using X.PagedList;
@@ -62,33 +63,41 @@ namespace MinhaAPI.Repositories //AQUI TEM APENAS A LÓGICA DE ACESSO A DADOS
 
         public async Task<IPagedList<Categoria>> GetAllAsync(CategoriasParameters categoriasParams)
         {
-            //var categorias = GetCategoiras().OrderBy(p => p.CategoriaId).AsQueryable();
+            ////var categorias = GetCategoiras().OrderBy(p => p.CategoriaId).AsQueryable();
 
-            var categorias = await GetCategoirasAsync();
-            //orderBy sincrono
-            var categoriasOrdenadas = categorias.OrderBy(p => p.CategoriaId).AsQueryable();
-            //var resultado = PagedList<Categoria>.ToPagedList(categoriasOrdenadas, categoriasParams._pageNumber, categoriasParams.PageSize);
-            var resultado = await categoriasOrdenadas.ToPagedListAsync(categoriasParams._pageNumber, categoriasParams.PageSize);
+            //var categorias = await GetCategoirasAsync();
+            ////orderBy sincrono
+            //var categoriasOrdenadas = categorias.OrderBy(p => p.CategoriaId).AsQueryable();
+            ////var resultado = PagedList<Categoria>.ToPagedList(categoriasOrdenadas, categoriasParams._pageNumber, categoriasParams.PageSize);
+            //var resultado = await categoriasOrdenadas.ToPagedListAsync(categoriasParams._pageNumber, categoriasParams.PageSize);
 
+            //return resultado;
+
+            var categorias = _context.Categorias.OrderBy(c => c.CategoriaId);
+
+            // Retorna a lista paginada de forma assíncrona
+            var resultado = await categorias.ToPagedListAsync(categoriasParams._pageNumber, categoriasParams.PageSize);
             return resultado;
         }
 
         public async Task<IPagedList<Categoria>> GetCategoriasFiltroNomeAsync(CategoriasFiltroNome categoriasParams)
         {
-            //var categorias = GetCategoiras().AsQueryable();
-            var categorias = await GetCategoirasAsync();
-            if (!string.IsNullOrEmpty(categoriasParams.Nome))
-            {
-                categorias = categorias.Where(c => c.Nome.Contains(categoriasParams.Nome));
-            }
+            //FORMA QUEE O FÁBIO ENSINOU, MAS ACHEI CONFUSO E MUDEI PRA FORMA DE BAIXO
+            //IQueryable<Categoria> ct;
+            //var stringDePesquisa = categoriasParams.Nome ?? string.Empty;
+            //ct = from c in _context.Categorias //puxamos direto do DB pois ele vem como IQueryable direto, do que fazer oq fez no de cima onde puca pelo GetCategoirasAsync e esse formato de escrever o código se chama expression language
+            //     where c.Nome.Contains(stringDePesquisa)
+            //     select c;
+            //return await ct.ToPagedListAsync(categoriasParams._pageNumber, categoriasParams.PageSize);
 
-            // var categoriasFiltradas = PagedList<Categoria>.ToPagedList(categorias.AsQueryable(),categoriasParams._pageNumber, categoriasParams.PageSize);
 
-            var categoriasFiltradas = await categorias
-    .AsQueryable() // Converte para IQueryable para permitir a paginação
-    .ToPagedListAsync(categoriasParams._pageNumber, categoriasParams.PageSize);
+            var stringDePesquisa = categoriasParams.Nome ?? string.Empty;
 
-            return categoriasFiltradas;
+            // Usa métodos de extensão LINQ para aplicar o filtro
+            var categoria = _context.Categorias.Where(c => c.Nome.Contains(stringDePesquisa));
+
+            // Retorna a lista paginada de forma assíncrona
+            return await categoria.ToPagedListAsync(categoriasParams._pageNumber, categoriasParams.PageSize);
         }
     }
 }

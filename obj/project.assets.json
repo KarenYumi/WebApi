@@ -44,6 +44,19 @@
           }
         }
       },
+      "JetBrains.Annotations/2024.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/JetBrains.Annotations.dll": {
+            "related": ".deps.json;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/JetBrains.Annotations.dll": {
+            "related": ".deps.json;.xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.JsonPatch/8.0.8": {
         "type": "package",
         "dependencies": {
@@ -1281,6 +1294,29 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "JetBrains.Annotations/2024.2.0": {
+      "sha512": "GNnqCFW/163p1fOehKx0CnAqjmpPrUSqrgfHM6qca+P+RN39C9rhlfZHQpJhxmQG/dkOYe/b3Z0P8b6Kv5m1qw==",
+      "type": "package",
+      "path": "jetbrains.annotations/2024.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "jetbrains.annotations.2024.2.0.nupkg.sha512",
+        "jetbrains.annotations.nuspec",
+        "lib/JetBrains.Annotations.2024.2.0.snupkg",
+        "lib/net20/JetBrains.Annotations.dll",
+        "lib/net20/JetBrains.Annotations.xml",
+        "lib/netstandard1.0/JetBrains.Annotations.deps.json",
+        "lib/netstandard1.0/JetBrains.Annotations.dll",
+        "lib/netstandard1.0/JetBrains.Annotations.xml",
+        "lib/netstandard2.0/JetBrains.Annotations.deps.json",
+        "lib/netstandard2.0/JetBrains.Annotations.dll",
+        "lib/netstandard2.0/JetBrains.Annotations.xml",
+        "lib/portable40-net40+sl5+win8+wp8+wpa81/JetBrains.Annotations.dll",
+        "lib/portable40-net40+sl5+win8+wp8+wpa81/JetBrains.Annotations.xml"
       ]
     },
     "Microsoft.AspNetCore.JsonPatch/8.0.8": {
@@ -3427,6 +3463,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
+      "JetBrains.Annotations >= 2024.2.0",
       "Microsoft.AspNetCore.JsonPatch >= 8.0.8",
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 8.0.8",
       "Microsoft.EntityFrameworkCore >= 8.0.8",
@@ -3440,23 +3477,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kyumm\\.nuget\\packages\\": {},
+    "C:\\Users\\ksilva\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kyumm\\Desktop\\YO\\ESTÁGIO\\WebApi\\MinhaAPI.csproj",
+      "projectUniqueName": "C:\\Users\\ksilva\\Documents\\Curso_WebAPI\\MinhaAPI - Copia\\MinhaAPI\\MinhaAPI.csproj",
       "projectName": "MinhaAPI",
-      "projectPath": "C:\\Users\\kyumm\\Desktop\\YO\\ESTÁGIO\\WebApi\\MinhaAPI.csproj",
-      "packagesPath": "C:\\Users\\kyumm\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kyumm\\Desktop\\YO\\ESTÁGIO\\WebApi\\obj\\",
+      "projectPath": "C:\\Users\\ksilva\\Documents\\Curso_WebAPI\\MinhaAPI - Copia\\MinhaAPI\\MinhaAPI.csproj",
+      "packagesPath": "C:\\Users\\ksilva\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ksilva\\Documents\\Curso_WebAPI\\MinhaAPI - Copia\\MinhaAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\kyumm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ksilva\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3492,6 +3529,10 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
             "version": "[12.0.1, )"
+          },
+          "JetBrains.Annotations": {
+            "target": "Package",
+            "version": "[2024.2.0, )"
           },
           "Microsoft.AspNetCore.JsonPatch": {
             "target": "Package",
@@ -3557,7 +3598,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

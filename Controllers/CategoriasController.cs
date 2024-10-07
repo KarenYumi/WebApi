@@ -396,12 +396,12 @@ public class CategoriasController : ControllerBase
 
 
     [HttpGet("filter/nome/pagination")]
-    public async Task<ActionResult<IEnumerable<CategoriaDTO>>> GetCategoriasFiltradas( [FromQuery] CategoriasFiltroNome categoriasFiltro)
+    public async Task<ActionResult<IPagedList<Categoria>>> GetCategoriasFiltradas( [FromQuery] CategoriasFiltroNome categoriasFiltro)
     {
-        var categoriasFiltradas = await _uow.CategoriaRepository
-                                     .GetCategoriasFiltroNomeAsync(categoriasFiltro);
+        var categoriasFiltradas = await _uow.CategoriaRepository.GetCategoriasFiltroNomeAsync(categoriasFiltro);
 
-        return ObterCategorias(categoriasFiltradas);
+        //  return ObterCategorias(categoriasFiltradas);
+        return Ok(categoriasFiltradas);
 
     }
 

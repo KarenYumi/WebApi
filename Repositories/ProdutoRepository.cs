@@ -75,8 +75,8 @@ namespace MinhaAPI.Repositories
         //mudei o código para ficar assincrono
         public async Task<IPagedList<Produto>> GetAllAsync(ProdutosParameters produtosParams)
         {
-            var produtos = await GetProdutosAsync();
-            var produtosOrdenados = produtos.OrderBy(p => p.ProdutoId).AsQueryable();
+            
+            var produtosOrdenados = _context.Produtos.OrderBy(p => p.ProdutoId).AsQueryable();
 
             var resultado = await produtosOrdenados.ToPagedListAsync(produtosParams._pageNumber, produtosParams.PageSize);
             return resultado;
@@ -103,7 +103,7 @@ namespace MinhaAPI.Repositories
                     produtos = produtos.Where(p => p.Preco == produtosFiltroParams.Preco.Value).OrderBy(p => p.Preco).ToList(); // Materializa a lista
                 }
             }
-            var produtosFiltrados = await produtos.AsQueryable().ToPagedListAsync( produtosFiltroParams._pageNumber,produtosFiltroParams.PageSize);
+            var produtosFiltrados = await _context.Produtos.ToPagedListAsync( produtosFiltroParams._pageNumber,produtosFiltroParams.PageSize);
             return produtosFiltrados;
         }
 

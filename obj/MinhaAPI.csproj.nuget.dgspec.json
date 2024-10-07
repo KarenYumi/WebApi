@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kyumm\\Desktop\\YO\\ESTÁGIO\\WebApi\\MinhaAPI.csproj": {}
+    "C:\\Users\\ksilva\\Documents\\Curso_WebAPI\\MinhaAPI - Copia\\MinhaAPI\\MinhaAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kyumm\\Desktop\\YO\\ESTÁGIO\\WebApi\\MinhaAPI.csproj": {
+    "C:\\Users\\ksilva\\Documents\\Curso_WebAPI\\MinhaAPI - Copia\\MinhaAPI\\MinhaAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kyumm\\Desktop\\YO\\ESTÁGIO\\WebApi\\MinhaAPI.csproj",
+        "projectUniqueName": "C:\\Users\\ksilva\\Documents\\Curso_WebAPI\\MinhaAPI - Copia\\MinhaAPI\\MinhaAPI.csproj",
         "projectName": "MinhaAPI",
-        "projectPath": "C:\\Users\\kyumm\\Desktop\\YO\\ESTÁGIO\\WebApi\\MinhaAPI.csproj",
-        "packagesPath": "C:\\Users\\kyumm\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kyumm\\Desktop\\YO\\ESTÁGIO\\WebApi\\obj\\",
+        "projectPath": "C:\\Users\\ksilva\\Documents\\Curso_WebAPI\\MinhaAPI - Copia\\MinhaAPI\\MinhaAPI.csproj",
+        "packagesPath": "C:\\Users\\ksilva\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ksilva\\Documents\\Curso_WebAPI\\MinhaAPI - Copia\\MinhaAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\kyumm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ksilva\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -53,6 +53,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.1, )"
+            },
+            "JetBrains.Annotations": {
+              "target": "Package",
+              "version": "[2024.2.0, )"
             },
             "Microsoft.AspNetCore.JsonPatch": {
               "target": "Package",
@@ -118,7 +122,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
