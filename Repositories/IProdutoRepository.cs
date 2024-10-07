@@ -17,5 +17,6 @@ namespace MinhaAPI.Repositories
         Task<IPagedList<Produto>> GetAllAsync(ProdutosParameters produtosParams);
 
         Task<IPagedList<Produto>> GetProdutosFiltroPrecoAsync(ProdutosFiltroPreco produtosFiltroParams);
+        Task<List<Produto>> GetProdutosPorCategoriasAsync(int categoriaId);
     }
 }

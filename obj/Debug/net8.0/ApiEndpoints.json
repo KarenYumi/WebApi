@@ -265,6 +265,32 @@
   },
   {
     "ContainingType": "MinhaAPI.Controllers.ProdutosController",
+    "Method": "GetProdutosPorCategoria",
+    "RelativePath": "api/Produtos/GetProdutosPorCategoria",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoriaId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "MinhaAPI.Models.Produto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MinhaAPI.Controllers.ProdutosController",
     "Method": "GetProdutosFilterPreco",
     "RelativePath": "api/Produtos/filter/preco/pagination",
     "HttpMethod": "GET",

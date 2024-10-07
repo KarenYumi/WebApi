@@ -86,6 +86,25 @@ namespace MinhaAPI.Controllers
 
 
 
+        [HttpGet("GetProdutosPorCategoria")]
+        public async Task<ActionResult<Produto>> GetProdutosPorCategoria(int categoriaId)
+        {
+            // Chama o método do repositório ou serviço para buscar os produtos pela categoria
+            var produtos = await _uow.ProdutoRepository.GetProdutosPorCategoriasAsync(categoriaId);
+
+            // Verifica se não há produtos para a categoria especificada
+            if (produtos == null || produtos.Count == 0)
+            {
+                return NotFound(); // Retorna 404 se nenhum produto for encontrado
+            }
+
+            return Ok(produtos); // Retorna 200 com a lista de produtos
+        }
+
+
+
+
+
         [HttpGet("pagination")]
         public async Task<ActionResult<IEnumerable<ProdutoDTO>>> Get([FromQuery] ProdutosParameters produtosParameters) //retorna uma lista de produtos
         {
@@ -191,6 +210,7 @@ namespace MinhaAPI.Controllers
                 return StatusCode(500, $"Falha ao atualizar o produto de id = {id}");
             }
         }
+        
 
 
 
@@ -216,6 +236,8 @@ namespace MinhaAPI.Controllers
 
 
         }
+
+        
 
 
 

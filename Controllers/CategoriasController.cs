@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MinhaAPI.Contexto;
@@ -254,6 +255,7 @@ public class CategoriasController : ControllerBase
 
     //mudei todos os _repository para _uow e mudei os .SaveChages para .Commit
     [HttpGet]
+    [Authorize]
     public async Task<ActionResult<IEnumerable<CategoriaDTO>>> Get()
     {
         var categorias =await _uow.CategoriaRepository.GetCategoirasAsync();

@@ -112,6 +112,12 @@ namespace MinhaAPI.Repositories
             throw new NotImplementedException();
         }
 
+        public async Task<List<Produto>> GetProdutosPorCategoriasAsync(int categoriaId)
+        {
+            var produtos = _context.Produtos.Where(p => p.CategoriaId == categoriaId).OrderBy(p => p.ProdutoId).AsQueryable();
+            return await produtos.ToListAsync();
+        }
+
         //public IEnumerable<Produto> GetProdutosPorCategoria(int id)
         //{
         //    return GetAll().Where(c => c.CategoriaId == id);
