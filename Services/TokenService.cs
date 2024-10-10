@@ -8,17 +8,18 @@ namespace MinhaAPI.Services
 {
     public class TokenService : ITokenService
     {
-        public JwtSecurityToken GenerateAcessToken(IEnumerable<Claim> claims, IConfiguration _config)
+
+        public JwtSecurityToken GenerateAccessToken(IEnumerable<Claim> claims, IConfiguration _config)
         {
-            var key = _config.GetSection("JWT").GetValue<string>("SecretKey") ??
+            var key = _config.GetSection("JWT").GetValue<string>("SecretKey") ?? //obtem a chave secreta do appsettings
                throw new InvalidOperationException("Invalid secret Key");
 
             var privateKey = Encoding.UTF8.GetBytes(key);
 
-            var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(privateKey),
+            var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(privateKey), //cria as credenciais de assinatura com chave secreta
                                      SecurityAlgorithms.HmacSha256Signature);
 
-            var tokenDescriptor = new SecurityTokenDescriptor
+            var tokenDescriptor = new SecurityTokenDescriptor  //define as propriedades do token
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddMinutes(_config.GetSection("JWT")
@@ -30,6 +31,7 @@ namespace MinhaAPI.Services
             };
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateJwtSecurityToken(tokenDescriptor);
+            Console.WriteLine("Token gerado com sucesso"); // Verifica se o token foi gerado
             return token;
         }
 
