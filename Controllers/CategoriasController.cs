@@ -15,8 +15,9 @@ using X.PagedList;
 
 namespace APICatalogo.Controllers;
 
-[Route("[controller]")]
+//[Authorize(Roles = "Admin")]
 [ApiController]
+[Route("[controller]")]
 public class CategoriasController : ControllerBase
 {
     private readonly IUnitOfWork _uow;//tira o repositorio e coloca esse
@@ -254,8 +255,8 @@ public class CategoriasController : ControllerBase
     //}
 
     //mudei todos os _repository para _uow e mudei os .SaveChages para .Commit
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpGet]
-    [Authorize]
     public async Task<ActionResult<IEnumerable<CategoriaDTO>>> Get()
     {
         var categorias =await _uow.CategoriaRepository.GetCategoirasAsync();
@@ -362,7 +363,7 @@ public class CategoriasController : ControllerBase
     }
 
 
-
+    [Authorize(AuthenticationSchemes = "Bearer", Policy = "AdminOnly")]
     [HttpDelete("{id:int}")]
     public async Task<ActionResult<CategoriaDTO>> Delete(int id)
     {
