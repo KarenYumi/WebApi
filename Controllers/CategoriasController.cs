@@ -1,6 +1,8 @@
 ﻿
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using MinhaAPI.Contexto;
 using MinhaAPI.DTOs;
@@ -18,6 +20,7 @@ namespace APICatalogo.Controllers;
 //[Authorize(Roles = "Admin")]
 [ApiController]
 [Route("[controller]")]
+[EnableRateLimiting("fixedwindow")] // necessita do nome da política
 public class CategoriasController : ControllerBase
 {
     private readonly IUnitOfWork _uow;//tira o repositorio e coloca esse
@@ -255,8 +258,9 @@ public class CategoriasController : ControllerBase
     //}
 
     //mudei todos os _repository para _uow e mudei os .SaveChages para .Commit
-    [Authorize(AuthenticationSchemes = "Bearer")]
+
     [HttpGet]
+    [DisableRateLimiting]
     public async Task<ActionResult<IEnumerable<CategoriaDTO>>> Get()
     {
         var categorias =await _uow.CategoriaRepository.GetCategoirasAsync();

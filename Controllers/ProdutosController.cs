@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +36,7 @@ namespace MinhaAPI.Controllers
 
         //Apenas mostra todos os itens
         [HttpGet]
+        [Authorize(AuthenticationSchemes = "Bearer", Policy ="UserOnly")]
         public async Task<ActionResult<IEnumerable<ProdutoDTO>>> Get() 
         {
             
