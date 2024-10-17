@@ -4,6 +4,7 @@ namespace MinhaAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [ApiExplorerSettings(IgnoreApi = true)] // n mostra na web
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

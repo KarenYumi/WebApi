@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MinhaAPI</name>
+    </assembly>
+    <members>
+        <member name="T:MinhaAPI.Migrations.MigrandoBancoParaPostgres">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.MigrandoBancoParaPostgres.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.MigrandoBancoParaPostgres.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.MigrandoBancoParaPostgres.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:MinhaAPI.Migrations.TrocadeDataImage">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.TrocadeDataImage.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.TrocadeDataImage.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.TrocadeDataImage.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:MinhaAPI.Migrations.PopularCategorias">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.PopularCategorias.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.PopularCategorias.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.PopularCategorias.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:MinhaAPI.Migrations.PopularProdutos">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.PopularProdutos.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.PopularProdutos.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.PopularProdutos.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:MinhaAPI.Migrations.CriaTabelasIdentity">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.CriaTabelasIdentity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.CriaTabelasIdentity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.CriaTabelasIdentity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:MinhaAPI.Migrations.AjustesApplicationUsers">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.AjustesApplicationUsers.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.AjustesApplicationUsers.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:MinhaAPI.Migrations.AjustesApplicationUsers.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:APICatalogo.Controllers.CategoriasController.Get">
+            <summary>
+            Obtém uma lista de objetos categoria
+            </summary>
+            <returns>Uma Lista de objetos categorias</returns>
+        </member>
+    </members>
+</doc>

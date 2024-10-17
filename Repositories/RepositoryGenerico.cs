@@ -1,0 +1,46 @@
+﻿using Microsoft.EntityFrameworkCore;
+using MinhaAPI.Contexto;
+using System.Linq.Expressions;
+
+namespace MinhaAPI.Repositories
+{
+    public class RepositoryGenerico<T> : IRepositoryGenerico<T> where T : class
+    {
+        protected readonly AppDbContext _context;
+        public RepositoryGenerico(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            return await _context.Set<T>().AsNoTracking().ToListAsync();
+        }
+
+        public async Task<T?> GetAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _context.Set<T>().FirstOrDefaultAsync(predicate);
+        }
+
+        public T Create(T entity)
+        {
+            _context.Set<T>().Add(entity);
+            //_context.SaveChanges();
+            return entity;
+        }
+        public T Update(T entity)
+        {
+            _context.Set<T>().Update(entity);
+            //_context.Entry(entity).State = EntityState.Modified;
+            //_context.SaveChanges();
+            return entity;
+        }
+        public T Delete(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+            //_context.SaveChanges();
+            return entity;
+        }
+
+    }
+}

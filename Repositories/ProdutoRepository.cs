@@ -11,11 +11,16 @@ namespace MinhaAPI.Repositories
     {
         private readonly AppDbContext _context;
 
-        public ProdutoRepository(AppDbContext context) {  _context = context; }
+        public ProdutoRepository(AppDbContext context) 
+        { 
+            _context = context;
+        }
+
         public async Task<List<Produto>> GetProdutosAsync() //retorna uma consulta que representa a seleção de todos os produtos da tabela no banco de dados
         {
             return await _context.Produtos.ToListAsync();
         }
+        
 
         public Produto Create(Produto produto)
         {
@@ -81,6 +86,7 @@ namespace MinhaAPI.Repositories
             var resultado = await produtosOrdenados.ToPagedListAsync(produtosParams._pageNumber, produtosParams.PageSize);
             return resultado;
         }
+
         public async Task<IPagedList<Produto>> GetProdutosFiltroPrecoAsync(ProdutosFiltroPreco produtosFiltroParams)
         {
             //var produtos = GetProdutosAsync().AsQueryable();//Queryable tem melhor desemplenho do q ienumerable
@@ -107,10 +113,7 @@ namespace MinhaAPI.Repositories
             return produtosFiltrados;
         }
 
-        Task<IQueryable<Produto>> IProdutoRepository.GetProdutosAsync()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public async Task<List<Produto>> GetProdutosPorCategoriasAsync(int categoriaId)
         {

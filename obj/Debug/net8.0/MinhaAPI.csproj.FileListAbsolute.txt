@@ -360,3 +360,10 @@ C:\Users\ksilva\Documents\Curso_WebAPI\MinhaAPI - Copia\MinhaAPI\bin\Debug\net8.
 C:\Users\ksilva\Documents\Curso_WebAPI\MinhaAPI - Copia\MinhaAPI\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\ksilva\Documents\Curso_WebAPI\MinhaAPI - Copia\MinhaAPI\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
 C:\Users\ksilva\Documents\Curso_WebAPI\MinhaAPI - Copia\MinhaAPI\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\ksilva\Documents\Curso_WebAPI\MinhaAPI - Copia\MinhaAPI\bin\Debug\net8.0\Asp.Versioning.Abstractions.dll
+C:\Users\ksilva\Documents\Curso_WebAPI\MinhaAPI - Copia\MinhaAPI\bin\Debug\net8.0\Asp.Versioning.Http.dll
+C:\Users\ksilva\Documents\Curso_WebAPI\MinhaAPI - Copia\MinhaAPI\bin\Debug\net8.0\Asp.Versioning.Mvc.dll
+C:\Users\ksilva\Documents\Curso_WebAPI\MinhaAPI - Copia\MinhaAPI\bin\Debug\net8.0\Asp.Versioning.Mvc.ApiExplorer.dll
+C:\Users\ksilva\Documents\Curso_WebAPI\MinhaAPI - Copia\MinhaAPI\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\ksilva\Documents\Curso_WebAPI\MinhaAPI - Copia\MinhaAPI\bin\Debug\net8.0\MinhaAPI.xml
+C:\Users\ksilva\Documents\Curso_WebAPI\MinhaAPI - Copia\MinhaAPI\obj\Debug\net8.0\MinhaAPI.xml

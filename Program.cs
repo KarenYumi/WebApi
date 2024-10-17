@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
@@ -15,6 +16,7 @@ using MinhaAPI.RateLimitOptions;
 using MinhaAPI.Repositories;
 using MinhaAPI.Services;
 using NuGet.Configuration;
+using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
@@ -46,6 +48,7 @@ builder.Services.AddEndpointsApiExplorer();
 //                                                USADO PARA CONEXÂO MYSQL
 //string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 //builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var secretKey = builder.Configuration["JWT:SecretKey"] ?? throw new ArgumentException("Invalid secret key!!");
 builder.Services.AddAuthentication(options =>
@@ -70,7 +73,7 @@ builder.Services.AddAuthentication(options =>
 });
 
 var myOptions = new MyRateLimitOptions();
-builder.Configuration.GetSection(MyRateLimitOptions.MyRateLimit).Bind(myOptions);
+builder.Configuration.GetSection(MyRateLimitOptions.MyRateLimit).Bind(myOptions); //pega a exceção dentro da classe e associa as conf. obtidas à instância da classe MyRateLimitOptions
 builder.Services.AddRateLimiter(rateLimiterOptions =>
 {
     rateLimiterOptions.AddFixedWindowLimiter(policyName: "fixedwindow", options =>
@@ -100,7 +103,21 @@ builder.Services.AddRateLimiter(options =>
                             }));
 });
 
+builder.Services.AddApiVersioning(o =>
+{
+    o.DefaultApiVersion = new ApiVersion(1, 0);
+    o.AssumeDefaultVersionWhenUnspecified = true; //se a versão n for especificado mostrará a versão padrão
+    o.ReportApiVersions = true; //as versões da api devem ser adicionadas no cabeçãlho headers do response
+    o.ApiVersionReader = ApiVersionReader.Combine(
+                          new QueryStringApiVersionReader(),
+                          new UrlSegmentApiVersionReader());
 
+}).AddApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV"; //a forma q a versão será mostrada, os três v é o numero da versão
+    options.SubstituteApiVersionInUrl = true; //gera links diferentes em versões diferentes
+
+});
 //AddScoped significa que uma instancia vai ser criada da uma vez de escopo de request
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
@@ -132,12 +149,10 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 
 builder.Services.AddAutoMapper(typeof(ProdutoDTOMappingAUTO));
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-    //PARA LER AS CONFIGURAÇÔES NO .JSON
+//PARA LER AS CONFIGURAÇÔES NO .JSON
 //var valor1 = builder.Configuration["chave1"];
 //var valor2 = builder.Configuration["secao1:chave1"];
-    //FIM
+//FIM
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -145,7 +160,28 @@ builder.Services.AddControllers();
 //builder.Services.AddSwaggerGen(); //substituido pelo debaixo
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "minhaapi", Version = "v1" });
+    //c.SwaggerDoc("v1", new OpenApiInfo { Title = "minhaapi", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version ="v1",
+        Title = "MinhaApi",
+        Description = "Catélogo de Produtos e Cateogorias",
+        TermsOfService = new Uri("https://www.karenapi.com/termns"),
+        Contact = new OpenApiContact
+        {
+            Name = "Karen",
+            Email = "karen.silva@brisabr.com.br",
+            Url = new Uri("https://www.karenapi.com"),
+        },
+        License = new OpenApiLicense 
+        { 
+            Name = "Usar sobre LICX",
+            Url = new Uri("https://www.karenapi.com/license"),
+        }
+    });
+
+   var xmlFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFileName));
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
     {

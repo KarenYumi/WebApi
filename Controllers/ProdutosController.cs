@@ -18,17 +18,20 @@ namespace MinhaAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiConventionType(typeof(DefaultApiConventions))]
+    //[ApiExplorerSettings(IgnoreApi = true)] // n mostra na web
     public class ProdutosController : ControllerBase
     {
        // private readonly IProdutoRepository _repository; //mudei o AppDbContext para o repositorio
-       private readonly IUnitOfWork _uow;
+        private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
 
-        public ProdutosController(IProdutoRepository repository, IUnitOfWork uow, IMapper mapper)
+        public ProdutosController(IUnitOfWork uow, IMapper mapper)
         {
             _uow = uow;
             _mapper = mapper;
         }
+
 
         //Tirei todos os try and cacth e mudei o context para reposiotort alterando seu contexto
 
@@ -36,19 +39,26 @@ namespace MinhaAPI.Controllers
 
         //Apenas mostra todos os itens
         [HttpGet]
-        [Authorize(AuthenticationSchemes = "Bearer", Policy ="UserOnly")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<IEnumerable<ProdutoDTO>>> Get() 
         {
-            
-            var produtos = await _uow.ProdutoRepository.GetProdutosAsync();
-            if (produtos is null)
+            try
             {
-                return NotFound();
-            }
-            var produtosDto = _mapper.Map<IEnumerable<ProdutoDTO>>(produtos); //usando o AutoMapper
-            return Ok(produtosDto);
-            
+                var produtos = await _uow.ProdutoRepository.GetProdutosAsync();
 
+                if (produtos is null)
+                    return NotFound();
+
+                var produtosDto = _mapper.Map<IEnumerable<ProdutoDTO>>(produtos);
+                return Ok(produtosDto);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
         ////Permite pesquisar o item 
         //[HttpGet("{id:int:min(1)}", Name = "ObterProduto")]
@@ -72,24 +82,33 @@ namespace MinhaAPI.Controllers
 
         //}
         //Permite pesquisar o item 
-
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("{id:int:min(1)}", Name = "ObterProduto")]
         public async Task<ActionResult<ProdutoDTO>> Get(int id)
         {
+            if (id == null || id <= 0)
+            {
+                return BadRequest("ID de produto inválido");
+            }
+
             var produto = await _uow.ProdutoRepository.GetProdutoAsync(id);
             if (produto is null)
             {
-                return NotFound("Produto não encontrado");
+                return NotFound("Produto não encontrado...");
             }
-            var produtoDto = _mapper.Map<ProdutoDTO>(produto); //usando o AutoMapper
+            var produtoDto = _mapper.Map<ProdutoDTO>(produto);
             return Ok(produtoDto);
+
         }
 
 
 
-
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("GetProdutosPorCategoria")]
-        public async Task<ActionResult<Produto>> GetProdutosPorCategoria(int categoriaId)
+        public async Task<ActionResult<ProdutoDTO>> GetProdutosPorCategoria(int categoriaId)
         {
             // Chama o método do repositório ou serviço para buscar os produtos pela categoria
             var produtos = await _uow.ProdutoRepository.GetProdutosPorCategoriasAsync(categoriaId);
@@ -99,8 +118,9 @@ namespace MinhaAPI.Controllers
             {
                 return NotFound(); // Retorna 404 se nenhum produto for encontrado
             }
+            var produtosDto = _mapper.Map<IEnumerable<ProdutoDTO>>(produtos);
 
-            return Ok(produtos); // Retorna 200 com a lista de produtos
+            return Ok(produtosDto); // Retorna 200 com a lista de produtos
         }
 
 
@@ -147,6 +167,9 @@ namespace MinhaAPI.Controllers
 
         //Permite adicionar um Produto novo
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(AuthenticationSchemes = "Bearer", Policy = "UserOnly")]
         public async Task<ActionResult<ProdutoDTO>> Post(ProdutoDTO produtoDto)
         {
             if (produtoDto is null)
@@ -163,13 +186,16 @@ namespace MinhaAPI.Controllers
 
 
         [HttpPatch("{id}/UpdatePartial")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProdutoDTOUpdateResponse>> Patch(int id, JsonPatchDocument<ProdutoDTOUpdateRequest> patchProdutoDTO) //ActionResult vai retornar o <> e usa o jasonpath e a <entrada> 
         {
             if(patchProdutoDTO is null || id<=0)
                 return BadRequest();
 
             var produto = await _uow.ProdutoRepository.GetProdutoAsync(id); //aqui usaria o lambda, mas como meu GetProduto não é bool pra retornar verdade ent coloquei apenas o id
-            if (produto is null)
+            if (produto == null)
                 return NotFound();
 
             var produtoUpdateRequest = _mapper.Map<ProdutoDTOUpdateRequest>(produto);
@@ -193,6 +219,9 @@ namespace MinhaAPI.Controllers
 
         //Permite alterar os dados de um produto já postado
         [HttpPut ("{id:int}")]//{id} é um parâmetro, mas serve como os anteriores a rota de acesso é api/produtos/{id}
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(AuthenticationSchemes = "Bearer", Policy = "UserOnly")]
         public async Task<ActionResult<ProdutoDTO>> Put(int id, ProdutoDTO produtoDto) 
         {
             
@@ -201,41 +230,49 @@ namespace MinhaAPI.Controllers
             var produto = _mapper.Map<Produto>(produtoDto); //usando o AutoMapper
             bool atualizado = _uow.ProdutoRepository.Update(produto);
             await _uow.CommitAsync();
-            var produtoAtualizado = _mapper.Map<ProdutoDTO>(atualizado); //usando o AutoMapper
+            
 
             if (atualizado)
             {
-                return Ok(produto);
+                var produtoAtualizado = _mapper.Map<ProdutoDTO>(produto); //usando o AutoMapper
+                return Ok(produtoAtualizado);
             }
             else
             {
-                return StatusCode(500, $"Falha ao atualizar o produto de id = {id}");
+                return BadRequest("Produto não encontrado...");
             }
         }
         
 
 
-
-
-
         //Exclue um produto
         [HttpDelete("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(AuthenticationSchemes = "Bearer", Policy = "UserOnly")]
         public async Task<ActionResult<ProdutoDTO>> Delete(int id) 
         {
+            // Buscar o produto antes de deletar
+            var produto = await _uow.ProdutoRepository.GetProdutoAsync(id);
+            if (produto == null)
+            {
+                return NotFound("Produto não encontrado...");
+            }
+
+            // Realizar a exclusão
             bool deletado = _uow.ProdutoRepository.Delete(id);
             await _uow.CommitAsync();
 
-            var produtoDeletadoDto = _mapper.Map<ProdutoDTO>(deletado);//usando o AutoMapper
-
             if (deletado)
             {
+                // Mapear o produto deletado para ProdutoDTO
+                var produtoDeletadoDto = _mapper.Map<ProdutoDTO>(produto);
                 return Ok(produtoDeletadoDto);
             }
             else
             {
-                return StatusCode(500, $"Falha ao excluir o produto de id = {id}");
+                return BadRequest("Erro ao excluir o produto.");
             }
-
 
         }
 

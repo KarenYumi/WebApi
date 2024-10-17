@@ -6,8 +6,9 @@ namespace MinhaAPI.Repositories
 {
     public interface IProdutoRepository
     {
+        
         //aleterei eles para assíncronas
-        Task<IQueryable<Produto>> GetProdutosAsync();
+        Task<List<Produto>> GetProdutosAsync(); //tava dando erro tirei o IQueryable e coloquei o List
         Task<Produto> GetProdutoAsync(int id);
         Produto Create(Produto produto);
         bool Update(Produto produto);

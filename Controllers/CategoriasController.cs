@@ -20,7 +20,8 @@ namespace APICatalogo.Controllers;
 //[Authorize(Roles = "Admin")]
 [ApiController]
 [Route("[controller]")]
-[EnableRateLimiting("fixedwindow")] // necessita do nome da política
+/*[ApiExplorerSettings(IgnoreApi = true)]*/ // n mostra na web
+//[EnableRateLimiting("fixedwindow")] // necessita do nome da política //será aplicada globalmente pelo código globalLimiter
 public class CategoriasController : ControllerBase
 {
     private readonly IUnitOfWork _uow;//tira o repositorio e coloca esse
@@ -258,9 +259,11 @@ public class CategoriasController : ControllerBase
     //}
 
     //mudei todos os _repository para _uow e mudei os .SaveChages para .Commit
-
+    /// <summary>
+    /// Obtém uma lista de objetos categoria
+    /// </summary>
+    /// <returns>Uma Lista de objetos categorias</returns>
     [HttpGet]
-    [DisableRateLimiting]
     public async Task<ActionResult<IEnumerable<CategoriaDTO>>> Get()
     {
         var categorias =await _uow.CategoriaRepository.GetCategoirasAsync();

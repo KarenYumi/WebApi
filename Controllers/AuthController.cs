@@ -14,6 +14,7 @@ namespace MinhaAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[ApiExplorerSettings(IgnoreApi = true)] // n mostra na web
     public class AuthController : ControllerBase
     {
        
